@@ -23,7 +23,7 @@ fruits_to_show = my_fruit_list.loc[fruits_selected]
 # Display the table on the page.
 streamlit.dataframe(fruits_to_show)
 
-streamlit.header("The fruit load list contains:")
+streamlit.header("View our Fruit List - Add Your Favourites!")
 
 # Snowflake related functions
 def get_fruit_load_list():
@@ -32,9 +32,10 @@ def get_fruit_load_list():
       return my_cur.fetchall()
    
 # Add a button to load the fruit
-if streamlit.button('Get Fruit Load List'):
+if streamlit.button('Get Fruit List'):
    my_cnx = snowflake.connector.connect(**streamlit.secrets["snowflake"])
    my_data_rows = get_fruit_load_list()
+   my_cnx.close()
    streamlit.dataframe(my_data_rows)
 
 # Create a function to get fruityvice data
